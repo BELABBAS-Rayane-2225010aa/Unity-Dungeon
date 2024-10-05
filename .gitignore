@@ -58,7 +58,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.aab
-#*.unitypackage
+*.unitypackage
 *.app
 
 # Crashlytics generated file
@@ -70,8 +70,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
-# Added for the project
-## Remember to change Path for some packages (ex CC importer)
-/Packages/manifest.json 
-/Packages/packages-lock.json
