@@ -17,13 +17,7 @@ public class WallCollision : MonoBehaviour
                 return;
             }
         }
-
-        if (gameObject.tag == "Entrance")
-        {
-            gameObject.GetComponent<Collider>().enabled = false;
-        }
-        else {
-            GetComponent<Collider>().enabled = true;
-        }
+        
+        GetComponent<Collider>().enabled = true;
     }
 }
