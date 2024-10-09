@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
-  startVectorPos: {x: -9, y: 0, z: 7}
+  startVectorPos: {x: -8, y: 0, z: 7}
   startPos: 0
   offset: {x: 4, y: 4}
   rooms:
@@ -160,6 +160,14 @@ MonoBehaviour:
     minPosition: {x: 0, y: 0}
     maxPosition: {x: 0, y: 0}
     EntranceExistence: 01010101
+  - room: {fileID: 8700648928390287595, guid: 8073592c84b559149bea5a02d21c7c13, type: 3}
+    minPosition: {x: 0, y: 0}
+    maxPosition: {x: 0, y: 0}
+    EntranceExistence: 01010000
+  - room: {fileID: 967952100768211238, guid: 9cddd07fe15e4b046b260cbcf7cfeac4, type: 3}
+    minPosition: {x: 0, y: 0}
+    maxPosition: {x: 0, y: 0}
+    EntranceExistence: 00000101
 --- !u!4 &335016047
 Transform:
   m_ObjectHideFlags: 0
@@ -169,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 335016045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: 0, z: 7}
+  m_LocalPosition: {x: -8, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
