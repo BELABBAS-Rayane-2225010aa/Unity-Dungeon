@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;
+    public float WalkingSpeed = 10f;
+    public float TurningSpeed = 10f;
 
     public float jumpspeed = 8f;
 
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveD = new Vector3(0, 0, Input.GetAxis("Vertical"));
             moveD = transform.TransformDirection(moveD);
-            moveD *= speed;
+            moveD *= WalkingSpeed;
 
             if (Input.GetButton("Jump"))
             {
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveD.y -= gravity * Time.deltaTime;
-        transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * speed * 10);
+        transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * TurningSpeed * 10);
 
         Cac.Move(moveD * Time.deltaTime);
     }
