@@ -9,6 +9,8 @@ public class RoomBehavior : MonoBehaviour
     public GameObject[] walls;
     public GameObject[] doors;
 
+    public bool isLastCell = false;
+
     public void UpdateRoom(bool[] status){
         for(int i = 0; i < status.Length; i++){
             doors[i].SetActive(status[i]);
@@ -16,4 +18,7 @@ public class RoomBehavior : MonoBehaviour
         }
     }
 
+    public void UpdateLastCell(bool lastCell){
+        isLastCell = lastCell;
+    }
 }
