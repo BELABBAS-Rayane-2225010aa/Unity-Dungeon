@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 6093621980291032843}
   - {fileID: 7355351193841636259}
   - {fileID: 4861386377564021348}
+  isLastCell: 0
 --- !u!1 &3413766302543799143
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Center.x
@@ -381,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 6229247520373792897, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_TagString
       value: Entrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -600,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -672,6 +677,10 @@ PrefabInstance:
     - target: {fileID: 6229247520373792897, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_TagString
       value: Entrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -870,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Center.x
@@ -1068,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1218,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Center.x
@@ -1515,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Center.x

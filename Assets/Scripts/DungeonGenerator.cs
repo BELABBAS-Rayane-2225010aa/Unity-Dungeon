@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
@@ -22,22 +23,31 @@ public class DungeonGenerator : MonoBehaviour
 
     public Vector2Int size;
     public Vector3Int startVectorPos;
-    public int startPos = 0;
+    public Vector2Int startPos = new Vector2Int(0,0);
     public Vector2 offset;
+    public float noise = 0.5f;
     public Rule[] rooms;
 
-    List<Cell> board;
+    List<List<Cell>> board;
+    RoomBehavior[,] roomGrid;
 
     // Start is called before the first frame update
     void Start()
     {
-        MazeGenerator();
+        /*
+        To generate the dungeon we uses a homebrew random dungeon generator
+        First we generate a grid of Cell of the size of the dungeon
+        Then we generate a dungeon that fullfil the grid with the full room
+        Then we choose the last room
+        Finnaly we generate the doors and a path to the last room
+        */
+        GridGenerator();
         GenerateDungeon();
     }
 
-    void MazeGenerator()
-    {
-        board = new List<Cell>();
+    void GridGenerator(){
+        board = new List<List<Cell>>();
+        roomGrid = new RoomBehavior[size.x, size.y];
 
         for (int i = 0; i < size.x; i++)
         {
@@ -46,182 +56,183 @@ public class DungeonGenerator : MonoBehaviour
                 board.Add(new Cell());
             }
         }
-
-        int currentCell = startPos;
-        Stack<int> path = new Stack<int>();
-        int k = 0;
-
-        while (k < 20)
-        {
-            k++;
-            board[currentCell].visited = true;
-
-            if (currentCell == board.Count - 1)
-            {
-                break;
-            }
-
-            // Check neighbors
-            List<int> neighbors = CheckNeighbors(currentCell);
-
-            if (neighbors.Count == 0)
-            {
-                if (path.Count == 0)
-                {
-                    break;
-                }
-                else
-                {
-                    currentCell = path.Pop();
-                }
-            }
-            else
-            {
-                path.Push(currentCell);
-                int newCell = neighbors[Random.Range(0, neighbors.Count)];
-
-                // down or right
-                if (newCell > currentCell)
-                {
-                    // right
-                    if (newCell - 1 == currentCell)
-                    {
-                        board[currentCell].status[2] = true;
-                        currentCell = newCell;
-                        board[currentCell].status[3] = true;
-                    }
-                    // down
-                    else
-                    {
-                        board[currentCell].status[1] = true;
-                        currentCell = newCell;
-                        board[currentCell].status[0] = true;
-                    }
-                }
-                // up or left
-                else
-                {
-                    // left
-                    if (newCell + 1 == currentCell)
-                    {
-                        board[currentCell].status[3] = true;
-                        currentCell = newCell;
-                        board[currentCell].status[2] = true;
-                    }
-                    // up
-                    else
-                    {
-                        board[currentCell].status[0] = true;
-                        currentCell = newCell;
-                        board[currentCell].status[1] = true;
-                    }
-                }
-            }
-        }
     }
 
-    void GenerateDungeon()
-    {
-        // Initialiser la première cellule avec la salle pleine (position 0 de Rule[] rooms)
-        Cell firstCell = board[0];
-        firstCell.visited = true;
-        var firstRoomPrefab = rooms[0].room;
-
-        var firstRoom = Instantiate(firstRoomPrefab, startVectorPos, firstRoomPrefab.transform.rotation, transform).GetComponent<RoomBehavior>();
-        firstRoom.UpdateRoom(firstCell.status);
-
-        firstRoom.name = "Room 0, 0";
-
-        // Générer le reste du donjon
+    void GenerateDungeon(){
+        // Generation of the blank dungeon
+        // Generation of the last Cell
+        // This Cell can be where ever it want but cannot be on the first position
+        GameObject lastCell = new();
+        int boardPos = Random.Range(1,board.Count - 1);
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
-                if (i == 0 && j == 0) continue; // Skip the first cell
-
                 Cell currentCell = board[i + j * size.x];
-                if (currentCell.visited)
+                var roomPrefab = rooms[0].room;
+                RoomBehavior newRoom;
+                if (i + j * size.x == boardPos)
                 {
-                    List<Rule> availableRooms = new List<Rule>();
-                    Rule corridorRoom = null;
-
-                    foreach (var room in rooms)
-                    {
-                        bool match = true;
-                        for (int k = 0; k < currentCell.status.Length; k++)
-                        {
-                            if (currentCell.status[k] && !room.EntranceExistence[k])
-                            {
-                                match = false;
-                                break;
-                            }
-                        }
-                        if (match)
-                        {
-                            // Vérifier si c'est une version de couloir
-                            if ((currentCell.status[0] && currentCell.status[1]) || (currentCell.status[2] && currentCell.status[3]))
-                            {
-                                corridorRoom = room;
-                            }
-                            else
-                            {
-                                availableRooms.Add(room);
-                            }
-                        }
-                    }
-
-                    Rule selectedRoom = null;
-                    if (corridorRoom != null)
-                    {
-                        selectedRoom = corridorRoom; // Prioriser la version de couloir
-                    }
-                    else if (availableRooms.Count > 0)
-                    {
-                        selectedRoom = availableRooms[Random.Range(0, availableRooms.Count)];
-                    }
-
-                    if (selectedRoom != null)
-                    {
-                        var roomPrefab = selectedRoom.room;
-
-                        var newRoom = Instantiate(roomPrefab, new Vector3(i * offset.x + startVectorPos.x, startVectorPos.y, -j * offset.y + startVectorPos.z), roomPrefab.transform.rotation, transform).GetComponent<RoomBehavior>();
-                        newRoom.UpdateRoom(currentCell.status);
-
-                        newRoom.name = "Room " + roomPrefab.name;
-                    }
+                    lastCell = Instantiate(roomPrefab, new Vector3(i * offset.x + startVectorPos.x, startVectorPos.y, -j * offset.y + startVectorPos.z), roomPrefab.transform.rotation, transform);
+                    newRoom = lastCell.GetComponent<RoomBehavior>();
+                    newRoom.UpdateRoom(currentCell.status);
+                    newRoom.UpdateLastCell(true);
                 }
+                else
+                {
+                    newRoom = Instantiate(roomPrefab, new Vector3(i * offset.x + startVectorPos.x, startVectorPos.y, -j * offset.y + startVectorPos.z), roomPrefab.transform.rotation, transform).GetComponent<RoomBehavior>();
+                    newRoom.UpdateRoom(currentCell.status);
+                }
+
+                roomGrid[i, j] = newRoom;
+            }
+        }
+        if (lastCell)
+        {
+            PathGenerator(lastCell);
+        }
+    }
+
+    void PathGenerator(GameObject lastCell){
+        int totalCells = size.x * size.y;
+        Vector2Int currentPos = startPos;
+        Vector2Int endPos = new Vector2Int((int)(lastCell.transform.position.x / offset.x), -(int)(lastCell.transform.position.z / offset.y));
+
+        List<Vector2Int> unvisitedCells = new List<Vector2Int>();
+        for (int i = 0; i < size.x; i++)
+        {
+            for (int j = 0; j < size.y; j++)
+            {
+                unvisitedCells.Add(new Vector2Int(i, j));
+            }
+        }
+        unvisitedCells.Remove(currentPos);
+
+
+        List<Vector2Int> path = new List<Vector2Int>();
+        path.Add(currentPos);
+
+        while (unvisitedCells.Count > 0)
+        {
+            List<Vector2Int> neighbours = GetUnvisitedNeighbours(currentPos, unvisitedCells);
+
+            if (neighbours.Count > 0)
+            {
+                Vector2Int nextPos;
+                if (Random.value < noise)
+                {
+                    nextPos = neighbours[Random.Range(0,neighbours.Count)];
+                }
+                else
+                {
+                    nextPos = GetClosestNeighbourToTarget(neighbours, endPos);
+                }
+
+                MarkPathOnBoard(currentPos, nextPos);
+
+                currentPos = nextPos;
+                path.Add(currentPos);
+                unvisitedCells.Remove(currentPos);
+            }
+            else
+            {
+                currentPos = path[path.Count - 2];
+                path.RemoveAt(path.Count - 1);
             }
         }
     }
 
-    List<int> CheckNeighbors(int cell)
+    List<Vector2Int> GetUnvisitedNeighbours(Vector2Int currentPos, List<Vector2Int> unvisitedCells)
     {
-        List<int> neighbors = new List<int>();
+        List<Vector2Int> neighbours = new List<Vector2Int>();
 
-        //check up
-        if(cell - size.x >= 0 && !board[cell - size.x].visited)
+        if (currentPos.x > 0 && unvisitedCells.Contains(new Vector2Int(currentPos.x - 1, currentPos.y)))
+            neighbours.Add(new Vector2Int(currentPos.x - 1, currentPos.y));  // Gauche
+        if (currentPos.x < size.x - 1 && unvisitedCells.Contains(new Vector2Int(currentPos.x + 1, currentPos.y)))
+            neighbours.Add(new Vector2Int(currentPos.x + 1, currentPos.y));  // Droite
+        if (currentPos.y > 0 && unvisitedCells.Contains(new Vector2Int(currentPos.x, currentPos.y - 1)))
+            neighbours.Add(new Vector2Int(currentPos.x, currentPos.y - 1));  // Bas
+        if (currentPos.y < size.y - 1 && unvisitedCells.Contains(new Vector2Int(currentPos.x, currentPos.y + 1)))
+            neighbours.Add(new Vector2Int(currentPos.x, currentPos.y + 1));  // Haut
+
+        return neighbours;
+    }
+
+
+    Vector2Int GetClosestNeighbourToTarget(List<Vector2Int> neighbours, Vector2Int target)
+    {
+        Vector2Int closest = neighbours[0];
+        float minDist = Vector2Int.Distance(neighbours[0], target);
+
+        foreach (var neighbour in neighbours)
         {
-            neighbors.Add(cell - size.x);
+            float dist = Vector2Int.Distance(neighbour, target);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = neighbour;
+            }
+        }
+        return closest;
+    }
+
+    void MarkPathOnBoard(Vector2Int from, Vector2Int to)
+    {
+        // Vérifie d'abord que les deux cellules sont valides
+        if (!IsValidCell(from) || !IsValidCell(to)) return;
+
+        Cell currentCell = board[from.x + from.y * size.x];
+        Cell nextCell = board[to.x + to.y * size.x];
+
+        // Gère les déplacements horizontaux
+        if (from.x < to.x)  // Aller à droite
+        {
+            currentCell.status[2] = true;  // Porte droite ouverte
+            nextCell.status[3] = true;     // Porte gauche ouverte
+        }
+        else if (from.x > to.x)  // Aller à gauche
+        {
+            currentCell.status[3] = true;  // Porte gauche ouverte
+            nextCell.status[2] = true;     // Porte droite ouverte
+        }
+        // Gère les déplacements verticaux
+        else if (from.y < to.y)  // Aller en haut
+        {
+            currentCell.status[0] = true;  // Porte haut ouverte
+            nextCell.status[1] = true;     // Porte bas ouverte
+        }
+        else if (from.y > to.y)  // Aller en bas
+        {
+            currentCell.status[1] = true;  // Porte bas ouverte
+            nextCell.status[0] = true;     // Porte haut ouverte
         }
 
-        //check down
-        if(cell + size.x < board.Count && !board[cell + size.x].visited)
+        // Met à jour les objets visuels dans la scène (les salles)
+        var roomFrom = GetRoomAtPosition(from);
+        var roomTo = GetRoomAtPosition(to);
+
+        if (roomFrom != null)
         {
-            neighbors.Add(cell + size.x);
+            roomFrom.UpdateRoom(currentCell.status);
         }
 
-        //check right
-        if((cell + 1) % size.x != 0 && !board[cell + 1].visited)
+        if (roomTo != null)
         {
-            neighbors.Add(cell + 1);
+            roomTo.UpdateRoom(nextCell.status);
         }
+    }
 
-        //check left
-        if(cell % size.x != 0 && !board[cell - 1].visited)
+    // Ajout d'une fonction utilitaire pour vérifier si une cellule est valide
+    bool IsValidCell(Vector2Int position)
+    {
+        return position.x >= 0 && position.x < size.x && position.y >= 0 && position.y < size.y;
+    }
+
+    RoomBehavior GetRoomAtPosition(Vector2Int position){
+        if (position.x >= 0 && position.x < size.x && position.y >= 0 && position.y < size.y)
         {
-            neighbors.Add(cell - 1);
+            return roomGrid[position.x,position.y];
         }
-
-        return neighbors;
+        return null;
     }
 }
