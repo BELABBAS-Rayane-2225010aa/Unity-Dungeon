@@ -153,8 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
   startVectorPos: {x: -8, y: 0, z: 7}
-  startPos: 0
+  startPos: {x: 0, y: 0}
   offset: {x: 4, y: 4}
+  noise: 0.5
   rooms:
   - room: {fileID: 1593485523573926081, guid: 051da27b03f5bad4cbef710119f057f8, type: 3}
     minPosition: {x: 0, y: 0}

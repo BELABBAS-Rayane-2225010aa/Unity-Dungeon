@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 7853142404999250086}
   - {fileID: 4032360395586789272}
   - {fileID: 8555942792648436745}
+  isLastCell: 0
 --- !u!1 &5345490645138106754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

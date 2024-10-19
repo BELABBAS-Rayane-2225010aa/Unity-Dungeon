@@ -164,6 +164,7 @@ MonoBehaviour:
   - {fileID: 1233797870640672973}
   - {fileID: 3971729142536772194}
   - {fileID: 7113070280788966212}
+  isLastCell: 0
 --- !u!1001 &788041102115064125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -880,6 +881,10 @@ PrefabInstance:
     - target: {fileID: 6229247520373792897, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
       propertyPath: m_Name
       value: Down Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272033854698529402, guid: 346e9cbf1a4a8044c83a927aa03bfa15, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
