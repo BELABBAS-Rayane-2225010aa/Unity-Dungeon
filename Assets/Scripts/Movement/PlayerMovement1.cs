@@ -7,36 +7,52 @@ public class PlayerMovement : MonoBehaviour
     public float WalkingSpeed = 10f;
     public float TurningSpeed = 10f;
 
-    public float jumpspeed = 8f;
-
-    public float gravity = 20f;
+    public float JumpSpeed = 8f;
+    public float Gravity = 20f;
 
     private Vector3 moveD = Vector3.zero;
-    CharacterController Cac;
+    private CharacterController characterController;
 
     void Start()
     {
-        Cac = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Cac.isGrounded)
+        if (characterController.isGrounded)
         {
+            // Déplacement avant/arrière (Z)
             moveD = new Vector3(0, 0, Input.GetAxis("Vertical"));
+
+            // Déplacement latéral (strafe) avec Q et D
+            moveD.x = Input.GetAxis("Horizontal");
+
             moveD = transform.TransformDirection(moveD);
             moveD *= WalkingSpeed;
 
+            // Saut
             if (Input.GetButton("Jump"))
             {
-                moveD.y = jumpspeed;
+                moveD.y = JumpSpeed;
             }
         }
 
-        moveD.y -= gravity * Time.deltaTime;
-        transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * TurningSpeed * 10);
+        // Gravité
+        moveD.y -= Gravity * Time.deltaTime;
 
-        Cac.Move(moveD * Time.deltaTime);
+        // Rotation gauche/droite avec E et A
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(Vector3.up * TurningSpeed * Time.deltaTime*10);
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(Vector3.down * TurningSpeed * Time.deltaTime*10);
+        }
+
+        // Appliquer le mouvement
+        characterController.Move(moveD * Time.deltaTime);
     }
 }
