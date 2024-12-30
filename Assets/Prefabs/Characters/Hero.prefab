@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 197191216517096901}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,8 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkingSpeed: 10
   TurningSpeed: 10
-  jumpspeed: 8
-  gravity: 20
+  JumpSpeed: 8
+  Gravity: 20
 --- !u!143 &197191216517096901
 CharacterController:
   m_ObjectHideFlags: 0
