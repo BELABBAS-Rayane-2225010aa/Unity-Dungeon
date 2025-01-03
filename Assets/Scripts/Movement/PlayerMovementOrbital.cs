@@ -6,9 +6,11 @@ public class PlayerMovementOrbital : MonoBehaviour
 {
     public float MoveSpeed = 5f;
     public float RotationSpeed = 720f;
-
     public float Gravity = 20f;
+    public float JumpForce = 8f; // Force de saut
+
     public Transform mainCamera; // Référence à la caméra orbitale
+    public Animator animator; // Référence à l'Animator pour gérer les animations
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
@@ -20,11 +22,17 @@ public class PlayerMovementOrbital : MonoBehaviour
         {
             mainCamera = Camera.main.transform;
         }
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
     void Update()
     {
         HandleMovement();
+        UpdateAnimation();
     }
 
     private void HandleMovement()
@@ -46,6 +54,12 @@ public class PlayerMovementOrbital : MonoBehaviour
             right.Normalize();
 
             moveDirection = (forward * vertical + right * horizontal).normalized * MoveSpeed;
+
+            // Vérifier si le joueur appuie sur la touche de saut
+            if (Input.GetButtonDown("Jump"))
+            {
+                moveDirection.y = JumpForce;
+            }
         }
 
         // Appliquer la gravité
@@ -59,6 +73,18 @@ public class PlayerMovementOrbital : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.z));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        // Vérifier si le joueur est en mouvement (horizontal ou vertical)
+        bool isMoving = moveDirection.x != 0 || moveDirection.z != 0;
+
+        // Appliquer l'animation Idle ou de mouvement
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", isMoving);
         }
     }
 }
