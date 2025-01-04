@@ -167,8 +167,32 @@ public class PlayerBehavior : MonoBehaviour
 
     public void EquipWeapon(GameObject weapon)
     {
-        EquipedWeapon = weapon;
+        if (EquipedWeapon != null)
+        {
+            Destroy(EquipedWeapon); 
+        }
+
+        // Equipe la nouvelle arme
+        EquipedWeapon = Instantiate(weapon, transform.position, transform.rotation);
+        
+        // Trouver la main droite du personnage (assurez-vous que le nom de l'os correspond)
+        Transform rightHand = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
+        
+        if (rightHand != null)
+        {
+            // Attacher l'arme à la main droite
+            EquipedWeapon.transform.SetParent(rightHand);
+            
+            // Ajuster la position et la rotation de l'arme
+            EquipedWeapon.transform.localPosition = new Vector3 (-0.4f, 0.2f, 0); // Position relative à la main
+            EquipedWeapon.transform.localRotation = Quaternion.Euler(90, 0, 90); // Rotation de l'arme
+        }
+        else
+        {
+            Debug.LogError("Right Hand not found in the model.");
+        }
     }
+
 
     private void UpdateAnimation()
     {

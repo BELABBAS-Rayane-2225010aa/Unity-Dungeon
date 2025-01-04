@@ -32,7 +32,15 @@ public class WeaponPickup : MonoBehaviour
     void EquipWeapon()
     {
         // Équipe l'arme au joueur
-        Player.Instance.EquipWeapon(weaponPrefab); // Appel de la méthode EquipWeapon du joueur
-        Destroy(gameObject); // Détruit l'arme sur le sol après l'avoir ramassée
+        PlayerBehavior playerBehavior = FindObjectOfType<PlayerBehavior>();
+        if (playerBehavior != null)
+        {
+            playerBehavior.EquipWeapon(weaponPrefab); // Appel de la méthode EquipWeapon du PlayerBehavior
+            Destroy(gameObject); // Détruit l'arme sur le sol après l'avoir ramassée
+        }
+        else
+        {
+            Debug.LogError("PlayerBehavior not found.");
+        }
     }
 }
