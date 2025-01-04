@@ -156,6 +156,7 @@ public class PlayerBehavior : MonoBehaviour
         animator.SetTrigger("Weapon");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         EquipedWeapon.GetComponent<Weapon>().Attack(target);
+        animator.SetTrigger("unWeapon");
     }
 
     private IEnumerator AttackWithFists(GameObject target)
@@ -163,6 +164,7 @@ public class PlayerBehavior : MonoBehaviour
         animator.SetTrigger("Fist");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         target.GetComponent<Zombie>().TakeDamage(10);
+        animator.SetTrigger("unFist");
     }
 
     public void EquipWeapon(GameObject weapon)

@@ -31,10 +31,14 @@ public class DungeonGenerator : MonoBehaviour
         public Vector2Int minPosition;
         public Vector2Int maxPosition;
         public bool[] EntranceExistence = new bool[4];
+        public bool isCorridor = false;
     }
 
     public GameObject trophy;
     public GameObject teleporterPrefab;
+    public GameObject enemy;
+    public GameObject hole;
+    public GameObject chest;
 
     public Vector2Int size;
     public Vector3Int startVectorPos;
@@ -51,7 +55,7 @@ public class DungeonGenerator : MonoBehaviour
         GridGenerator();
         GenerateDungeon();
         MarkLastCell();
-        PopulateCells(trophy,teleporterPrefab, gameObject.name);
+        PopulateCells(trophy,teleporterPrefab, enemy, hole, chest, gameObject.name);
     }
 
     void GridGenerator() {
@@ -173,9 +177,6 @@ public class DungeonGenerator : MonoBehaviour
         // Conversion du tableau de booléens en chaîne de caractères
         string statusValues = string.Join(", ", cell.status.Select(b => b.ToString()).ToArray());
 
-        // Affichage en une seule fois avec la position de la currentRoom
-        Debug.Log("Room : (" + i + ", " + j + ") : " + statusValues);
-
         // Mettre à jour le visuel de la salle
         RoomBehavior room = roomGrid[i, j];
         room.UpdateRoom(cell.status);
@@ -197,6 +198,7 @@ public class DungeonGenerator : MonoBehaviour
                 // Instancier la nouvelle salle
                 RoomBehavior newRoom = Instantiate(roomPrefab, position, rotation, transform).GetComponent<RoomBehavior>();
                 newRoom.name = "Room" + i + "|" + j;
+                newRoom.isCorridor = rooms.First(r => r.room == roomPrefab).isCorridor;
                 roomGrid[i, j] = newRoom;
 
                 // Mettre à jour le visuel de la salle
@@ -242,14 +244,14 @@ public class DungeonGenerator : MonoBehaviour
         lastRoom.UpdateLastCell(true);
     }
 
-    void PopulateCells(GameObject trophy, GameObject teleporterPrefab, string ownerObjectName)
+    void PopulateCells(GameObject trophy, GameObject teleporterPrefab, GameObject Ennemy, GameObject Hole, GameObject Chest, string gameObjectName)
     {
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
                 RoomBehavior currentRoom = roomGrid[i, j];
-                currentRoom.PopulateRoom(trophy, teleporterPrefab, ownerObjectName);
+                currentRoom.PopulateRoom(trophy, teleporterPrefab, Ennemy, Hole, Chest, gameObjectName);
             }
         }
     }
