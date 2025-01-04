@@ -1434,6 +1434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hole
       objectReference: {fileID: 0}
+    - target: {fileID: 4211316309959570495, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4677828938983907582, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
