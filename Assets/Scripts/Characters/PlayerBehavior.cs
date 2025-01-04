@@ -6,7 +6,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     GameObject EquipedWeapon;
 
-    private float AttackRange = 1.5f;
+    public float AttackRange = 1.5f;
 
     public float MoveSpeed = 5f;
     public float RotationSpeed = 720f;
