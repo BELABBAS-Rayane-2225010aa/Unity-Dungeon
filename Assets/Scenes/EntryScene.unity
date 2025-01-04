@@ -260,8 +260,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283615207
+  m_fontColor: {r: 0.9056604, g: 0.781852, b: 0.32039872, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 1854023001}
   - component: {fileID: 1854023000}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Entry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2c135c1c03e314aa5dcb72d6a79c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: DemoScene
+  sceneToLoad: GameScene
 --- !u!65 &1854023001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1516,6 +1516,10 @@ PrefabInstance:
     - target: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
       propertyPath: m_Name
       value: hole
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211316309959570495, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4677828938983907582, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
       propertyPath: m_LocalPosition.x
