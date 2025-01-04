@@ -8,6 +8,6 @@ public class Weapon : MonoBehaviour
 
     public void Attack(GameObject target)
     {
-        target.GetComponent<ZombieBehavior>().TakeDamage(damage);
+        target.GetComponent<Zombie>().TakeDamage(damage);
     }
 }

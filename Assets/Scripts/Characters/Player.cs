@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int health = 100;
+    public static Player Instance { get; private set; }
 
-    GameObject EquipedWeapon;
+    int health = 100;
 
     void Die()
     {
@@ -16,31 +16,30 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("Player health: " + health);
         if (health <= 0)
         {
             Die();
         }
     }
 
-    public void Attack(GameObject target)
+    void Awake()
     {
-        if (EquipedWeapon != null)
+
+        if (Instance == null)
+
         {
-            EquipedWeapon.GetComponent<Weapon>().Attack(target);
+
+            Instance = this;
+
         }
+
         else
+
         {
-            AttackWithFists(target);
+
+            Destroy(gameObject);
+
         }
-    }
-
-    void AttackWithFists(GameObject target)
-    {
-        target.GetComponent<ZombieBehavior>().TakeDamage(10);
-    }
-
-    public void EquipWeapon(GameObject weapon)
-    {
-        EquipedWeapon = weapon;
     }
 }
