@@ -74,20 +74,12 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-
-        if (Instance == null) return;
-
         if (isDead) return; // Pas d'attaque possible si le joueur est mort
-
-        if (EquipedWeapon != null)
-        {
-
+        
+        if (Instance == null){
             Instance = this;
-
         }
-
         else
-
         {
 
             Destroy(gameObject);
