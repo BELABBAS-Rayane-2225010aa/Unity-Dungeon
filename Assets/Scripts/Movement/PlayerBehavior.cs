@@ -151,6 +151,8 @@ public class PlayerBehavior : MonoBehaviour
 
     void AttackWithFists(GameObject target)
     {
+        animator.SetTrigger("Fist");
+        //animator.GetCurrentAnimatorStateInfo(0).length);
         target.GetComponent<Zombie>().TakeDamage(10);
     }
 
