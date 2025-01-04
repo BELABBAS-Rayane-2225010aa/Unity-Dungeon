@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class Player : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            // Charge la scène spécifiée
+            SceneManager.LoadScene("EndScene");
         }
     }
 
@@ -68,6 +71,8 @@ public class Player : MonoBehaviour
 
         // Détruire le GameObject après l'animation
         Destroy(gameObject);
+        // Charge la scène spécifiée
+        SceneManager.LoadScene("EndScene");
     }
 
     public void TakeDamage(int damage)
