@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     }
 
     public int GetHealth()
-{
-    return health; // Retourne la santé actuelle du joueur
-}
+    {
+        return health; // Retourne la santé actuelle du joueur
+    }
 }
