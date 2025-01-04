@@ -95,4 +95,9 @@ public class Player : MonoBehaviour
         // Logique de déplacement (exemple)
         transform.Translate(direction * Time.deltaTime);
     }
+
+    public int GetHealth()
+{
+    return health; // Retourne la santé actuelle du joueur
+}
 }
