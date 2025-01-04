@@ -163,7 +163,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         animator.SetTrigger("Fist");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        target.GetComponent<Zombie>().TakeDamage(5);
+        target.GetComponent<Zombie>().TakeDamage(100);
         animator.SetTrigger("unFist");
     }
 
