@@ -33,6 +33,8 @@ public class DungeonGenerator : MonoBehaviour
         public bool[] EntranceExistence = new bool[4];
     }
 
+    public GameObject teleporterPrefab;
+
     public Vector2Int size;
     public Vector3Int startVectorPos;
     public Vector2Int startPos = new Vector2Int(0, 0);
@@ -48,6 +50,7 @@ public class DungeonGenerator : MonoBehaviour
         GridGenerator();
         GenerateDungeon();
         MarkLastCell();
+        PopulateCells(teleporterPrefab);
     }
 
     void GridGenerator() {
@@ -236,5 +239,17 @@ public class DungeonGenerator : MonoBehaviour
         RoomBehavior lastRoom = roomGrid[size.x - 1, size.y - 1];
 
         lastRoom.UpdateLastCell(true);
+    }
+
+    void PopulateCells(GameObject teleporterPrefab)
+    {
+        for (int i = 0; i < size.x; i++)
+        {
+            for (int j = 0; j < size.y; j++)
+            {
+                RoomBehavior currentRoom = roomGrid[i, j];
+                currentRoom.PopulateRoom(teleporterPrefab, offset);
+            }
+        }
     }
 }
