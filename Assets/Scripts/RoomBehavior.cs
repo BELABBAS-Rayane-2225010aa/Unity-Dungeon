@@ -23,11 +23,21 @@ public class RoomBehavior : MonoBehaviour
     }
 
     // add object to the room randomly
-    public void PopulateRoom(GameObject teleporterPrefab, Vector2 offset){
-        // if lastCell, add teleporter
+    public void PopulateRoom(GameObject trophy, GameObject teleporterPrefab, string gameObjectName){
+        // if lastCell, add teleporter + if 3 stage add trophy
         if(isLastCell){
-            GameObject teleporter = Instantiate(teleporterPrefab);
-            teleporter.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            if (gameObjectName == "DungeonGenerator3")
+            {
+                GameObject trophyObject = Instantiate(trophy);
+                trophyObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                trophyObject.name = "Trophy";
+            }
+            else
+            {
+                GameObject teleporter = Instantiate(teleporterPrefab);
+                teleporter.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                teleporter.name = "Teleporter" + gameObjectName;
+            }
         }
 
         // if not lastCell, add enemies, holes, chests, randomly

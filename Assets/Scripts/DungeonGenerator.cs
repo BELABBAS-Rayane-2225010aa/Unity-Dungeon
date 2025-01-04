@@ -33,6 +33,7 @@ public class DungeonGenerator : MonoBehaviour
         public bool[] EntranceExistence = new bool[4];
     }
 
+    public GameObject trophy;
     public GameObject teleporterPrefab;
 
     public Vector2Int size;
@@ -45,12 +46,12 @@ public class DungeonGenerator : MonoBehaviour
     RoomBehavior[,] roomGrid;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+        GridGenerator();
         GridGenerator();
         GenerateDungeon();
         MarkLastCell();
-        PopulateCells(teleporterPrefab);
+        PopulateCells(trophy,teleporterPrefab, gameObject.name);
     }
 
     void GridGenerator() {
@@ -241,14 +242,14 @@ public class DungeonGenerator : MonoBehaviour
         lastRoom.UpdateLastCell(true);
     }
 
-    void PopulateCells(GameObject teleporterPrefab)
+    void PopulateCells(GameObject trophy, GameObject teleporterPrefab, string ownerObjectName)
     {
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
                 RoomBehavior currentRoom = roomGrid[i, j];
-                currentRoom.PopulateRoom(teleporterPrefab, offset);
+                currentRoom.PopulateRoom(trophy, teleporterPrefab, ownerObjectName);
             }
         }
     }

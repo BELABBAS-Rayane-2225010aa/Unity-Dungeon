@@ -141,18 +141,27 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (EquipedWeapon != null)
         {
-            EquipedWeapon.GetComponent<Weapon>().Attack(target);
+            // attendre la fin de l'animation d'attaque
+            StartCoroutine(AttackWeapon(target));
         }
         else
         {
-            AttackWithFists(target);
+            // attendre la fin de l'animation d'attaque
+            StartCoroutine(AttackWithFists(target));
         }
     }
 
-    void AttackWithFists(GameObject target)
+    private IEnumerator AttackWeapon(GameObject target)
+    {
+        animator.SetTrigger("Weapon");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        EquipedWeapon.GetComponent<Weapon>().Attack(target);
+    }
+
+    private IEnumerator AttackWithFists(GameObject target)
     {
         animator.SetTrigger("Fist");
-        //animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         target.GetComponent<Zombie>().TakeDamage(10);
     }
 
