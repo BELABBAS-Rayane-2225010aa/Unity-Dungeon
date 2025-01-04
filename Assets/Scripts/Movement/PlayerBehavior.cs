@@ -12,7 +12,7 @@ public class PlayerBehavior : MonoBehaviour
     public float RotationSpeed = 720f;
     public float Gravity = 20f;
     public float JumpForce = 8f; // Force de saut
-    public float MouseSensitivity = 100f;
+    public float MouseSensitivity = 250f;
 
     public Transform mainCamera; // Référence à la caméra orbitale
     public Animator animator; // Référence à l'Animator pour gérer les animations

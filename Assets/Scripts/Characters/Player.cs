@@ -6,11 +6,21 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     int health = 100;
-    GameObject EquipedWeapon;
+    private float nextLevelDistance = 4f;
     Animator animator;
 
     // Indicateur pour savoir si le joueur est mort
     bool isDead = false;
+
+    public float getNextLevelDistance()
+    {
+        return nextLevelDistance;
+    }
+
+    public void setNextLevelDistance(float distance)
+    {
+        nextLevelDistance = distance;
+    }
 
     void Start()
     {
