@@ -96,8 +96,22 @@ public class Player : MonoBehaviour
         transform.Translate(direction * Time.deltaTime);
     }
 
+    public void EquipWeapon(GameObject weapon)
+    {
+        // Si l'arme est déjà équipée, on la déséquipe d'abord (si nécessaire)
+        if (EquipedWeapon != null)
+        {
+            Destroy(EquipedWeapon); // Vous pouvez garder une référence à l'arme déséquippée si vous voulez la réutiliser
+        }
+
+        // Equipe la nouvelle arme
+        EquipedWeapon = Instantiate(weapon, transform.position, transform.rotation);
+        EquipedWeapon.transform.parent = transform; // L'arme est attachée au joueur
+        EquipedWeapon.transform.localPosition = new Vector3(0.5f, 0, 1); // Ajustez la position de l'arme en fonction de votre modèle
+    }
+
     public int GetHealth()
-{
-    return health; // Retourne la santé actuelle du joueur
-}
+    {
+        return health; // Retourne la santé actuelle du joueur
+    }
 }
