@@ -13,7 +13,7 @@ public class TextManager : MonoBehaviour
         if (isTextVisible && Input.GetKeyDown(KeyCode.E))
         {
             HideText();
-            //destroy(gameObject);
+            Destroy(gameObject);
         }
     }
     
