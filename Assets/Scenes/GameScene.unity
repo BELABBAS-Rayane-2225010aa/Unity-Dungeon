@@ -831,6 +831,9 @@ MonoBehaviour:
   animator: {fileID: 1063765115}
   audioSource: {fileID: 0}
   footstepSounds: []
+  footstepParticlePrefab: {fileID: 0}
+  leftFoot: {fileID: 0}
+  rightFoot: {fileID: 0}
 --- !u!114 &1063765117
 MonoBehaviour:
   m_ObjectHideFlags: 0
