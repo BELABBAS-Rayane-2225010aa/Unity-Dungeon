@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     Animator animator;
 
     // Indicateur pour savoir si le joueur est mort
-    bool isDead = false;
+    private bool isDead = false;
 
     public float getNextLevelDistance()
     {
@@ -97,5 +97,10 @@ public class Player : MonoBehaviour
     public int GetHealth()
     {
         return health; // Retourne la santé actuelle du joueur
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
     }
 }

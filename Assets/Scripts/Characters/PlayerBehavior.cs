@@ -16,10 +16,15 @@ public class PlayerBehavior : MonoBehaviour
 
     public Transform mainCamera; // Référence à la caméra orbitale
     public Animator animator; // Référence à l'Animator pour gérer les animations
+    public AudioSource audioSource; // Référence au composant AudioSource
+    public AudioClip[] footstepSounds; // Liste des sons de pas
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
     private float mouseX;
+
+    private float footstepTimer = 0f;
+    private float footstepInterval = 0.5f; 
 
     void Start()
     {
@@ -27,6 +32,11 @@ public class PlayerBehavior : MonoBehaviour
         if (mainCamera == null)
         {
             mainCamera = Camera.main.transform;
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
         }
 
         if (animator == null)
@@ -67,6 +77,7 @@ public class PlayerBehavior : MonoBehaviour
                 if (Input.GetButton("Jump"))
                 {
                     moveDirection.y = JumpForce;
+                    TriggerJumpAnimation(); // Lancer l'animation de saut
                 }
             }
 
@@ -103,6 +114,8 @@ public class PlayerBehavior : MonoBehaviour
                 if (Input.GetButtonDown("Jump"))
                 {
                     moveDirection.y = JumpForce;
+                    TriggerJumpAnimation(); // Lancer l'animation de saut
+                    // animator.SetTrigger("unJump");
                 }
             }
 
@@ -118,6 +131,15 @@ public class PlayerBehavior : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.z));
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
             }
+        }
+    }
+
+    private void TriggerJumpAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Jump");
+            animator.SetTrigger("endJump");
         }
     }
 
@@ -195,6 +217,14 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    public void PlayFootstepSound()
+    {
+        if (footstepSounds.Length > 0 && audioSource != null)
+        {
+            int randomIndex = Random.Range(0, footstepSounds.Length);
+            audioSource.PlayOneShot(footstepSounds[randomIndex]);
+        }
+    }
 
     private void UpdateAnimation()
     {
@@ -205,6 +235,20 @@ public class PlayerBehavior : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isMoving", isMoving);
+        }
+    // Jouer le son de pas si le joueur est en mouvement
+        if (isMoving)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                PlayFootstepSound();
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // Réinitialiser le timer si le joueur s'arrête
         }
     }
 }
