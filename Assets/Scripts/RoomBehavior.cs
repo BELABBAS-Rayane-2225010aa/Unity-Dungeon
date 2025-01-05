@@ -50,6 +50,7 @@ public class RoomBehavior : MonoBehaviour
                 {
                     GameObject weaponObject = Instantiate(weapon);
                     weaponObject.transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y + 1, transform.position.z);
+                    weaponObject.transform.localScale = new Vector3(.1439161f, .1439161f, .1439161f);
                     weaponObject.name = "Weapon";
                 }
                 return;
@@ -74,6 +75,7 @@ public class RoomBehavior : MonoBehaviour
                 for(int i = 0; i < randomEnemy; i++){
                     GameObject enemy = Instantiate(Ennemy);
                     enemy.transform.position = new Vector3(transform.position.x + i, transform.position.y, transform.position.z + i);
+                    enemy.transform.localScale = new Vector3(0.625f, 0.625f, 0.625f);
                     enemy.name = "Enemy" + i;
                 }
             }
@@ -91,6 +93,8 @@ public class RoomBehavior : MonoBehaviour
                 // if chest, add boss in the room
                 GameObject boss = Instantiate(Boss);
                 boss.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                boss.transform.localScale = new Vector3(0.625f, 0.625f, 0.625f);
+                boss.name = "Boss";
                 GameObject chest = Instantiate(Chest);
                 chest.transform.position = new Vector3(transform.position.x, transform.position.y + .25f, transform.position.z);
                 chest.name = "Chest";
