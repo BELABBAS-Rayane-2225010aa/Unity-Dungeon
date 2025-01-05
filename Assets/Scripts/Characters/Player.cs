@@ -46,12 +46,6 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Die");
             StartCoroutine(WaitForDeathAnimation());
         }
-        else
-        {
-            Destroy(gameObject);
-            // Charge la scène spécifiée
-            SceneManager.LoadScene("EndScene");
-        }
     }
 
     IEnumerator WaitForDeathAnimation()
@@ -69,8 +63,6 @@ public class Player : MonoBehaviour
         // Attendre la durée de l'animation
         yield return new WaitForSeconds(stateInfo.length);
 
-        // Détruire le GameObject après l'animation
-        Destroy(gameObject);
         // Charge la scène spécifiée
         SceneManager.LoadScene("EndScene");
     }
@@ -100,15 +92,6 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
 
         }
-    }
-
-    // Exemple pour empêcher le déplacement
-    public void Move(Vector3 direction)
-    {
-        if (isDead) return; // Pas de déplacement possible si le joueur est mort
-
-        // Logique de déplacement (exemple)
-        transform.Translate(direction * Time.deltaTime);
     }
 
     public int GetHealth()
