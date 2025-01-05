@@ -23,7 +23,7 @@ public class teleporter : MonoBehaviour
             StartCoroutine(ReenablePlayerBehavior(player));
 
             // incrémente la distance du prochain level
-            player.GetComponent<Player>().setNextLevelDistance(nextLevelDistance + 4f);
+            player.GetComponent<Player>().setNextLevelDistance(nextLevelDistance + 6f);
         }
     }
 

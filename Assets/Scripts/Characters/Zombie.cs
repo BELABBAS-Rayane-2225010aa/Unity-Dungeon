@@ -11,6 +11,8 @@ public class Zombie : MonoBehaviour
 
     Animator animator;
 
+    bool isDead = false;
+
     void Start()
     {
         // Récupération de l'Animator attaché à ce GameObject
@@ -18,27 +20,25 @@ public class Zombie : MonoBehaviour
     }
 
     void Die()
-    {
-        // Désactiver tous les scripts attachés à ce GameObject
-        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
-        foreach (MonoBehaviour script in scripts)
         {
-            script.enabled = false;
-        }
+            if (isDead) return; 
 
-        if (animator != null)
-        {
-            animator.SetTrigger("Death");
-            StartCoroutine(WaitForDeathAnimation());
+            isDead = true; 
+            DropLoot();
+            
+            if (animator != null)
+            {
+                animator.SetTrigger("Death");
+                StartCoroutine(WaitForDeathAnimation());
+            }
         }
-    }
 
     IEnumerator WaitForDeathAnimation()
     {
         // Obtenir la durée de l'animation de mort
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        // Si l'animation "Death" est déjà en cours
+        // Si l'animation "Die" est déjà en cours
         while (!stateInfo.IsName("Death"))
         {
             yield return null; // Attendre le début de l'animation
@@ -47,16 +47,15 @@ public class Zombie : MonoBehaviour
 
         // Attendre la durée de l'animation
         yield return new WaitForSeconds(stateInfo.length);
-
-        DropLoot();
         Destroy(gameObject);
+
+
     }
 
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log("Zombie health: " + health);
         if (health <= 0)
         {
             Die();

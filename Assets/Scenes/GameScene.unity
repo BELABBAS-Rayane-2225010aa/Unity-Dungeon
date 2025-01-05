@@ -156,10 +156,10 @@ MonoBehaviour:
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
   Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
-  hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
+  hole: {fileID: 4515508031088028838, guid: 846e6a564da197d4a81a72ac9f43346c, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
-  startVectorPos: {x: -8, y: 8, z: 7}
+  startVectorPos: {x: -8, y: 12, z: 7}
   startPos: {x: 0, y: 0}
   offset: {x: 4, y: 4}
   rooms:
@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 79181673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 8, z: 7}
+  m_LocalPosition: {x: -8, y: 12, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -330,7 +330,7 @@ MonoBehaviour:
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
   Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
-  hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
+  hole: {fileID: 4515508031088028838, guid: 846e6a564da197d4a81a72ac9f43346c, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
   startVectorPos: {x: -8, y: 0, z: 7}
@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 429767379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 11, z: 0}
+  m_LocalPosition: {x: -1, y: 15, z: 0}
   m_LocalScale: {x: 20, y: 0.1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1083,7 +1083,7 @@ Transform:
   m_GameObject: {fileID: 1529305282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 7, z: 0}
+  m_LocalPosition: {x: -1, y: 9, z: 0}
   m_LocalScale: {x: 20, y: 0.1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1250,10 +1250,10 @@ MonoBehaviour:
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
   Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
-  hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
+  hole: {fileID: 4515508031088028838, guid: 846e6a564da197d4a81a72ac9f43346c, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
-  startVectorPos: {x: -8, y: 4, z: 7}
+  startVectorPos: {x: -8, y: 6, z: 7}
   startPos: {x: 0, y: 0}
   offset: {x: 4, y: 4}
   rooms:
@@ -1281,7 +1281,7 @@ Transform:
   m_GameObject: {fileID: 1778558149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 4, z: 7}
+  m_LocalPosition: {x: -8, y: 6, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

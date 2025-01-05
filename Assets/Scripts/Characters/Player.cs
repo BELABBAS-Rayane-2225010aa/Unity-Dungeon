@@ -6,8 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
-    int health = 100;
-    private float nextLevelDistance = 4f;
+    int health = 300;
+    private float nextLevelDistance = 6f;
     Animator animator;
 
     // Indicateur pour savoir si le joueur est mort
@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
         if (isDead) return; // Ignorer les dégâts si le joueur est déjà mort
 
         health -= damage;
-        Debug.Log("Player health: " + health);
         if (health <= 0)
         {
             Die();
