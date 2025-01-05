@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.1010001
       objectReference: {fileID: 0}
+    - target: {fileID: 114953712324284294, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: pickupSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e38932b9950bcd45971b710cde8f599, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

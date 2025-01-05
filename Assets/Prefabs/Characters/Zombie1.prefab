@@ -1810,6 +1810,7 @@ MonoBehaviour:
   MoveSpeed: 5
   RotationSpeed: 720
   Gravity: 20
+  pickupSound: {fileID: 8300000, guid: ec4f9bcb9ba74454786fe8bdf7db3c8e, type: 3}
 --- !u!143 &384130753517853717
 CharacterController:
   m_ObjectHideFlags: 0

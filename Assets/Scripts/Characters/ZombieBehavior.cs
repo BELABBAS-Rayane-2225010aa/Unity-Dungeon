@@ -12,6 +12,7 @@ public class ZombieBehavior : MonoBehaviour
     public float MoveSpeed = 5f;
     public float RotationSpeed = 720f;
     public float Gravity = 20f;
+    public AudioClip pickupSound;
 
     //public Animator animator;
 
@@ -78,6 +79,8 @@ public class ZombieBehavior : MonoBehaviour
         if (!isAttacking && Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
             StartCoroutine(AttackAfterDelay());
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
+
         }
     }
 
@@ -100,6 +103,7 @@ public class ZombieBehavior : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isMoving", isMoving);
+
         }
     }
 }

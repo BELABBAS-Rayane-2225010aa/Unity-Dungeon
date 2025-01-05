@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChestBehavior : MonoBehaviour
 {
     public GameObject dropPrefab;
+    public AudioClip pickupSound;
 
     private bool isNearChest = false;
 
@@ -40,6 +41,7 @@ public class ChestBehavior : MonoBehaviour
         // delete the key from the player
         Player.GetComponent<PlayerBehavior>().SetHasKey(false);
         this.GetComponent<Animator>().SetTrigger("Open");
+        AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         // wair for the animation to finish
         StartCoroutine(DropItems());
     }

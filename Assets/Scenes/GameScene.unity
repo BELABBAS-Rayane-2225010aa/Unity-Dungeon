@@ -911,8 +911,11 @@ MonoBehaviour:
   animator: {fileID: 1063765115}
   keyImage: {fileID: 891717464}
   audioSource: {fileID: 1063765120}
-  footstepSounds:
+  sounds:
   - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+  - {fileID: 8300000, guid: bdbd177083e806c4bbb791215cb689ab, type: 3}
+  - {fileID: 8300000, guid: 01c281f911bee0b4c8368ea6ae930c19, type: 3}
+  - {fileID: 8300000, guid: fa7d5bcbfe304b54583edbc5a94356d8, type: 3}
   footstepParticlePrefab: {fileID: 5386461431348731504, guid: bb595ca93122f3246b58d0535c55582a, type: 3}
   leftFoot: {fileID: 1248502466}
   rightFoot: {fileID: 1248502465}

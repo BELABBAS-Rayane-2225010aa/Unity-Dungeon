@@ -23,7 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     public Animator animator; // Référence à l'Animator pour gérer les animations
     public Image keyImage;  // Référence à l'image de la clé
     public AudioSource audioSource; // Référence au composant AudioSource
-    public AudioClip[] footstepSounds; // Liste des sons de pas
+    public AudioClip[] sounds; // Liste des sons
     public GameObject footstepParticlePrefab; // Le prefab des particules
     public Transform leftFoot; // Transform du pied gauche
     public Transform rightFoot; // Transform du pied droit
@@ -185,6 +185,11 @@ public class PlayerBehavior : MonoBehaviour
     private IEnumerator AttackWeapon(GameObject target)
     {
         animator.SetTrigger("Weapon");
+        if (sounds.Length > 0 && audioSource != null)
+        {
+            audioSource.volume = 0.2f;
+            audioSource.PlayOneShot(sounds[1]);
+        }
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         EquipedWeapon.GetComponent<Weapon>().Attack(target);
         animator.SetTrigger("unWeapon");
@@ -193,6 +198,11 @@ public class PlayerBehavior : MonoBehaviour
     private IEnumerator AttackWithFists(GameObject target)
     {
         animator.SetTrigger("Fist");
+        if (sounds.Length > 0 && audioSource != null)
+        {
+            audioSource.volume = 0.01f;
+            audioSource.PlayOneShot(sounds[3]);
+        }
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         target.GetComponent<Zombie>().TakeDamage(5);
         animator.SetTrigger("unFist");
@@ -213,6 +223,11 @@ public class PlayerBehavior : MonoBehaviour
         
         if (rightHand != null)
         {
+            if (sounds.Length > 0 && audioSource != null)
+            {
+                audioSource.volume = 0.2f;
+                audioSource.PlayOneShot(sounds[2]);
+            }
             // Attacher l'arme à la main droite
             EquipedWeapon.transform.SetParent(rightHand);
             
@@ -228,10 +243,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public void PlayFootstepSound()
     {
-        if (footstepSounds.Length > 0 && audioSource != null)
+        if (sounds.Length > 0 && audioSource != null)
         {
-            int randomIndex = Random.Range(0, footstepSounds.Length);
-            audioSource.PlayOneShot(footstepSounds[randomIndex]);
+            audioSource.volume = 0.2f;
+            audioSource.PlayOneShot(sounds[0]);
         }
     }
     public void PlayFootstepParticles()

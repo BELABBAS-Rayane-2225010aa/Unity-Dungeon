@@ -5,9 +5,10 @@ using UnityEngine;
 public class SpikeTrapDemo : MonoBehaviour {
 
     //This script goes on the SpikeTrap prefab;
+    
 
     public Animator spikeTrapAnim; //Animator for the SpikeTrap;
-
+    public AudioClip pickupSound; //Sound to play when the trap opens;
     // Use this for initialization
     void Awake()
     {
@@ -22,6 +23,7 @@ public class SpikeTrapDemo : MonoBehaviour {
     {
         //play open animation;
         spikeTrapAnim.SetTrigger("open");
+        AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         //wait 2 seconds;
         yield return new WaitForSeconds(2);
         //play close animation;

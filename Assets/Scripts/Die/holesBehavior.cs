@@ -16,7 +16,7 @@ public class holesBehavior : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             animator.SetTrigger("open");
-            other.gameObject.GetComponent<Player>().TakeDamage(100);
+            other.gameObject.GetComponent<Player>().TakeDamage(Player.Instance.GetMaxHealth());
             animator.SetTrigger("close");
         }
     }
