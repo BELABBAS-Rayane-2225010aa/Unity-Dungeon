@@ -18,6 +18,9 @@ public class PlayerBehavior : MonoBehaviour
     public Animator animator; // Référence à l'Animator pour gérer les animations
     public AudioSource audioSource; // Référence au composant AudioSource
     public AudioClip[] footstepSounds; // Liste des sons de pas
+    public GameObject footstepParticlePrefab; // Le prefab des particules
+    public Transform leftFoot; // Transform du pied gauche
+    public Transform rightFoot; // Transform du pied droit
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
@@ -225,6 +228,15 @@ public class PlayerBehavior : MonoBehaviour
             audioSource.PlayOneShot(footstepSounds[randomIndex]);
         }
     }
+    public void PlayFootstepParticles()
+    {
+        if (footstepParticlePrefab != null)
+        {
+            // Instancier les particules à la position des pieds
+            Instantiate(footstepParticlePrefab, leftFoot.position, Quaternion.identity);
+            Instantiate(footstepParticlePrefab, rightFoot.position, Quaternion.identity);
+        }
+    }
 
     private void UpdateAnimation()
     {
@@ -243,6 +255,7 @@ public class PlayerBehavior : MonoBehaviour
             if (footstepTimer <= 0f)
             {
                 PlayFootstepSound();
+                PlayFootstepParticles();
                 footstepTimer = footstepInterval;
             }
         }
