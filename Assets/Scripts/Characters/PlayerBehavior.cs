@@ -6,6 +6,8 @@ public class PlayerBehavior : MonoBehaviour
 {
     GameObject EquipedWeapon;
 
+    bool asKey = false;
+
     public float AttackRange = 1.5f;
 
     public float MoveSpeed = 5f;
@@ -250,5 +252,15 @@ public class PlayerBehavior : MonoBehaviour
         {
             footstepTimer = 0f; // Réinitialiser le timer si le joueur s'arrête
         }
+    }
+
+    public void SetHasKey(bool value)
+    {
+        asKey = value;
+    }
+
+    public bool HasKey()
+    {
+        return asKey;
     }
 }
