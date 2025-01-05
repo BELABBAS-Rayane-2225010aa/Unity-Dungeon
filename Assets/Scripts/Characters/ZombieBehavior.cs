@@ -36,6 +36,7 @@ public class ZombieBehavior : MonoBehaviour
     {
         HandleMovement();
         HandleAttack();
+        UpdateAnimation();
     }
 
     private void HandleMovement()
@@ -64,10 +65,8 @@ public class ZombieBehavior : MonoBehaviour
 
         if (moveDirection.x != 0 || moveDirection.z != 0)
         {
-            animator.SetTrigger("Move");
             // Appliquer le mouvement
             characterController.Move(moveDirection * Time.deltaTime);
-            animator.SetTrigger("unMove");
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.z));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
@@ -90,5 +89,17 @@ public class ZombieBehavior : MonoBehaviour
         player.GetComponent<Player>().TakeDamage(10); // attaquer le joueur
         animator.SetTrigger("unAttack");
         isAttacking = false;
+    }
+
+    private void UpdateAnimation()
+    {
+        // Vérifier si le joueur est en mouvement (horizontal ou vertical)
+        bool isMoving = moveDirection.x != 0 || moveDirection.z != 0;
+
+        // Appliquer l'animation Idle ou de mouvement
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", isMoving);
+        }
     }
 }
