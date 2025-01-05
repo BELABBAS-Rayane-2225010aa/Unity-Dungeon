@@ -18,23 +18,24 @@ public class ZombieBehavior : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
     private GameObject player;
+    Animator animator;
     private bool isAttacking = false;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
         player = GameObject.FindWithTag("Player");
-        /*if (animator == null)
+        if (animator == null)
         {
             animator = GetComponent<Animator>();
-        }*/
+        }
     }
 
     void Update()
     {
         HandleMovement();
         HandleAttack();
-        //UpdateAnimation();
     }
 
     private void HandleMovement()
@@ -61,12 +62,12 @@ public class ZombieBehavior : MonoBehaviour
         // Appliquer la gravité
         moveDirection.y -= Gravity * Time.deltaTime;
 
-        // Appliquer le mouvement
-        characterController.Move(moveDirection * Time.deltaTime);
-
-        // Tourner le joueur vers la direction du mouvement
         if (moveDirection.x != 0 || moveDirection.z != 0)
         {
+            animator.SetTrigger("Move");
+            // Appliquer le mouvement
+            characterController.Move(moveDirection * Time.deltaTime);
+            animator.SetTrigger("unMove");
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.z));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
@@ -84,20 +85,10 @@ public class ZombieBehavior : MonoBehaviour
     IEnumerator AttackAfterDelay()
     {
         isAttacking = true;
-        yield return new WaitForSeconds(1f); // attendre 1 seconde avant d'attaquer
+        animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         player.GetComponent<Player>().TakeDamage(10); // attaquer le joueur
+        animator.SetTrigger("unAttack");
         isAttacking = false;
     }
-
-    /*private void UpdateAnimation()
-    {
-        // Vérifier si le joueur est en mouvement (horizontal ou vertical)
-        bool isMoving = moveDirection.x != 0 || moveDirection.z != 0;
-
-        // Appliquer l'animation Idle ou de mouvement
-        if (animator != null)
-        {
-            animator.SetBool("isMoving", isMoving);
-        }
-    }*/
 }
