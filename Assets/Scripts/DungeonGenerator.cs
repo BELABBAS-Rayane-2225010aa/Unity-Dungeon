@@ -37,6 +37,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject trophy;
     public GameObject teleporterPrefab;
     public GameObject enemy;
+    public GameObject Boss;
     public GameObject hole;
     public GameObject chest;
 
@@ -55,7 +56,7 @@ public class DungeonGenerator : MonoBehaviour
         GridGenerator();
         GenerateDungeon();
         MarkLastCell();
-        PopulateCells(trophy,teleporterPrefab, enemy, hole, chest, gameObject.name);
+        PopulateCells(trophy,teleporterPrefab, enemy, Boss, hole, chest, gameObject.name);
     }
 
     void GridGenerator() {
@@ -244,14 +245,14 @@ public class DungeonGenerator : MonoBehaviour
         lastRoom.UpdateLastCell(true);
     }
 
-    void PopulateCells(GameObject trophy, GameObject teleporterPrefab, GameObject Ennemy, GameObject Hole, GameObject Chest, string gameObjectName)
+    void PopulateCells(GameObject trophy, GameObject teleporterPrefab, GameObject Ennemy, GameObject Boss, GameObject Hole, GameObject Chest, string gameObjectName)
     {
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
                 RoomBehavior currentRoom = roomGrid[i, j];
-                currentRoom.PopulateRoom(trophy, teleporterPrefab, Ennemy, Hole, Chest, gameObjectName);
+                currentRoom.PopulateRoom(trophy, teleporterPrefab, Ennemy, Boss, Hole, Chest, gameObjectName);
             }
         }
     }

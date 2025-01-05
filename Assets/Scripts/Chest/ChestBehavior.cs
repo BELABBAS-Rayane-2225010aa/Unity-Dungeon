@@ -8,9 +8,11 @@ public class ChestBehavior : MonoBehaviour
 
     private bool isNearChest = false;
 
+    private GameObject Player;
+
     void Update()
     {
-        if (isNearChest && Input.GetKeyDown(KeyCode.E))
+        if (isNearChest && Input.GetKeyDown(KeyCode.E) && Player.GetComponent<PlayerBehavior>().HasKey())
         {
             OpenChest();
         }
@@ -20,6 +22,7 @@ public class ChestBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Player = other.gameObject;
             isNearChest = true;
         }
     }
@@ -34,6 +37,8 @@ public class ChestBehavior : MonoBehaviour
 
     void OpenChest()
     {
+        // delete the key from the player
+        Player.GetComponent<PlayerBehavior>().SetHasKey(false);
         this.GetComponent<Animator>().SetTrigger("Open");
         // wair for the animation to finish
         StartCoroutine(DropItems());

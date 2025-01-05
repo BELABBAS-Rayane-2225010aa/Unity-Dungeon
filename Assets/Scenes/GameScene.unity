@@ -154,6 +154,7 @@ MonoBehaviour:
   trophy: {fileID: 30427260164093571, guid: d1031695fb827d846b807ba08ab32df5, type: 3}
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
+  Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
   hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
@@ -326,6 +327,7 @@ MonoBehaviour:
   trophy: {fileID: 30427260164093571, guid: d1031695fb827d846b807ba08ab32df5, type: 3}
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
+  Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
   hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
@@ -827,6 +829,8 @@ MonoBehaviour:
   MouseSensitivity: 250
   mainCamera: {fileID: 0}
   animator: {fileID: 1063765115}
+  audioSource: {fileID: 0}
+  footstepSounds: []
 --- !u!114 &1063765117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,6 +1243,7 @@ MonoBehaviour:
   trophy: {fileID: 30427260164093571, guid: d1031695fb827d846b807ba08ab32df5, type: 3}
   teleporterPrefab: {fileID: 9138833899550650062, guid: e901814e90250b44493e1c11b769d728, type: 3}
   enemy: {fileID: 4493914613880827488, guid: 5428344aa8c00a44b93088e6faabfbc8, type: 3}
+  Boss: {fileID: 4493914613880827488, guid: d27c2787acb280846b042fa00387fdc2, type: 3}
   hole: {fileID: 1284331267393396413, guid: e736554fcf84cd1489e8d56a5fac396a, type: 3}
   chest: {fileID: 1757179307934195669, guid: c2f9e184ff3386b409fae4b05c5eb0a0, type: 3}
   size: {x: 4, y: 4}
