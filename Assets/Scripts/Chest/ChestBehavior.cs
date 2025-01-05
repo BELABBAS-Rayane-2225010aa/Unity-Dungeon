@@ -50,7 +50,7 @@ public class ChestBehavior : MonoBehaviour
         // Instantiate 3 dropPrefab at the position of the chest with an offset
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(dropPrefab, new Vector3(transform.position.x + i,transform.position.y,transform.position.z + i), dropPrefab.transform.rotation);
+            Instantiate(dropPrefab, new Vector3(transform.position.x + Random.Range(-1,2),transform.position.y + .5f,transform.position.z + Random.Range(-1,2)), dropPrefab.transform.rotation);
         }
         Destroy(gameObject);
     }
