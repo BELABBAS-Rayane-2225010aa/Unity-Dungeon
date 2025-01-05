@@ -24,7 +24,7 @@ public class RoomBehavior : MonoBehaviour
     }
 
     // add object to the room randomly
-    public void PopulateRoom(GameObject trophy, GameObject teleporterPrefab, GameObject Ennemy, GameObject Boss, GameObject Hole, GameObject Chest, string gameObjectName){
+    public void PopulateRoom(GameObject weapon, GameObject trophy, GameObject teleporterPrefab, GameObject Ennemy, GameObject Boss, GameObject Hole, GameObject Chest, string gameObjectName){
         // if lastCell, add teleporter + if 3 stage add trophy
         if(isLastCell){
             if (gameObjectName == "DungeonGenerator3")
@@ -45,6 +45,13 @@ public class RoomBehavior : MonoBehaviour
         else {
             if (this.gameObject.name == "Room0|0")
             {
+                // if first level, add weapon
+                if (gameObjectName == "DungeonGenerator1")
+                {
+                    GameObject weaponObject = Instantiate(weapon);
+                    weaponObject.transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y + 1, transform.position.z);
+                    weaponObject.name = "Weapon";
+                }
                 return;
             }
             // first choose if it is an enemy, hole, or chest room
