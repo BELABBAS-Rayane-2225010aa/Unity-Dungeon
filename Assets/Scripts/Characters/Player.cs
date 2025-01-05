@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     int health = 300;
     private float nextLevelDistance = 6f;
+    int maxHealth = 0;
     Animator animator;
 
     // Indicateur pour savoir si le joueur est mort
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     {
         // Récupération de l'Animator attaché à ce GameObject
         animator = GetComponent<Animator>();
+        this.maxHealth = health;
     }
 
     void Die()
@@ -96,6 +98,10 @@ public class Player : MonoBehaviour
     public int GetHealth()
     {
         return health; // Retourne la santé actuelle du joueur
+    }
+    public int GetMaxHealth()
+    {
+        return maxHealth; // Retourne la santé max du joueur
     }
 
     public bool getIsDead()

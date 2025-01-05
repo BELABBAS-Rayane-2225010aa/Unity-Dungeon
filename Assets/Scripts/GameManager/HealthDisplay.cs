@@ -17,7 +17,7 @@ public class HealthDisplay : MonoBehaviour
         // Met à jour l'affichage des PV
         if (player != null)
         {
-            healthText.text = player.GetHealth()+"/100"; // Affiche les PV
+            healthText.text = player.GetHealth()+ "/"+ player.GetMaxHealth(); // Affiche les PV
         }
     }
 }

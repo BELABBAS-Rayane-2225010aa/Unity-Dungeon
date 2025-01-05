@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public Transform mainCamera; // Référence à la caméra orbitale
     public Animator animator; // Référence à l'Animator pour gérer les animations
+    public Image keyImage;  // Référence à l'image de la clé
     public AudioSource audioSource; // Référence au composant AudioSource
     public AudioClip[] footstepSounds; // Liste des sons de pas
     public GameObject footstepParticlePrefab; // Le prefab des particules
@@ -271,6 +274,16 @@ public class PlayerBehavior : MonoBehaviour
     public void SetHasKey(bool value)
     {
         asKey = value;
+
+        if (asKey)
+        {
+            keyImage.enabled = true;
+
+        }
+        else
+        {
+            keyImage.enabled = false;
+        }
     }
 
     public bool HasKey()
